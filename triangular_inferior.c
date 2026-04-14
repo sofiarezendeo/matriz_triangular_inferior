@@ -21,10 +21,16 @@ void ti_libera(TriangularInferior *m) {
 }
 
 void ti_set(TriangularInferior *m, int i, int j, double v) {
+    if (j > i) return; 
+    int k = i * (i + 1) / 2 + j;
+    m->dados[k] = v;
     /* IMPLEMENTE ESTA FUNÇÃO */
 }
 
 double ti_get(const TriangularInferior *m, int i, int j) {
+    if (j > i) return 0.0; 
+    int k = i * (i + 1) / 2 + j;
+    return m->dados[k];
     /* IMPLEMENTE ESTA FUNÇÃO */
 }
 
@@ -50,5 +56,12 @@ void ti_imprime(const TriangularInferior *m) {
 }
 
 void ti_imprime_transposta(const TriangularInferior *m) {
+    for (int i = 0; i < m->n; i++) {
+        for (int j = 0; j < m->n; j++) {
+            if (j > 0) printf(" ");
+            printf("%.0f", ti_get(m, j, i));
+        }
+        printf("\n");
+    }
     /* IMPLEMENTE ESTA FUNÇÃO */
 }
